@@ -1528,7 +1528,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 end
 
 																
-local decompile = function(script)
+local decompile = function(script, timeout)
 	if typeof(script) ~= "Instance" then
 		error("invalid argument #1 to 'decompile' (Instance expected)", 2)
 		return
@@ -1558,7 +1558,7 @@ local decompile = function(script)
 		return
 	end
 
-	local output, elapsedTime = Decompile(result)
+	local output, elapsedTime = Decompile(result, timeout)
 
 	if RETURN_ELAPSED_TIME then
 		return output, elapsedTime
