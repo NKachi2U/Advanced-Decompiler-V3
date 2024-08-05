@@ -1400,7 +1400,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						end
 					end
 
-					print('constructor issue?
+					print('constructor issue?')
 					local ctor = opConstructors[opInfo.name]
 					if ctor then
 						print('constructor..?')
