@@ -596,6 +596,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 			--
 
+			print("Has there been an error yet"?)
+
 			local protoOutput = ""
 
 			local function addTab(depth)
@@ -613,9 +615,13 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				depth += 1
 			end
 
+			print('any error here?')
+
 			-- instruction handling here
 			local expectation
 			local nextIsAux = false
+
+			print('starting loop')
 
 			for insnIndex, insn in proto.insnTable do
 				if nextIsAux then
@@ -1517,8 +1523,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	end
 	--
 	bytecodeVersion = reader:nextByte()
-	print('bytecodeversion error?')
-	print(bytecodeVersion)
 	if bytecodeVersion == 0 then
 		-- script errored
 		return manager(false, "COMPILATION_FAILURE")
