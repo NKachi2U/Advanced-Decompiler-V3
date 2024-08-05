@@ -142,13 +142,17 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					local constValue
 					if constType == LuauBytecodeTag.LBC_CONSTANT_BOOLEAN then
 						-- 1 = true, 0 = false
+						print('1s')
 						constValue = toboolean(reader:nextByte())
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_NUMBER then
+						print('2s')
 						constValue = reader:nextDouble()
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_STRING then
+						print('3s')
 						local stringId = reader:nextVarInt()
 						constValue = stringTable[stringId]
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_IMPORT then
+						print('4s')
 						local id = reader:nextUInt32()
 
 						local indexCount = rshift(id, 30)
@@ -180,6 +184,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 						constValue = "import - " .. importTag
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_TABLE then
+						print('5s')
 						local sizeTable = reader:nextVarInt()
 						local tableKeys = {}
 
@@ -190,9 +195,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 						constValue = { ["size"] = sizeTable, ["keys"] = tableKeys }
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_CLOSURE then
+						print('6s')
 						local closureId = reader:nextVarInt() + 1
 						constValue = closureId
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_VECTOR then
+						print('7s')
 						local x, y, z, w = reader:nextFloat(), reader:nextFloat(), reader:nextFloat(), reader:nextFloat()
 						if w ~= 0 then
 							constValue = `Vector3.new({x}, {y}, {z}, {w})`
