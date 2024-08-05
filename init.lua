@@ -92,11 +92,12 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 		local protoTable = {}
 		local function readProtoTable()
-			print('ok here')
 			local sizeProtoTable = reader:nextVarInt()
-			print('still ight')
 			for i = 1, sizeProtoTable do
+				print('well well')
 				local protoId = i - 1 -- account for main proto
+
+				print('account')
 
 				local proto = {
 					id = protoId,
@@ -112,16 +113,22 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				}
 				protoTable[protoId] = proto
 
+				print('guh')
+
 				-- read header
 				proto.maxStackSize = reader:nextByte()
 				proto.numParams = reader:nextByte()
 				proto.numUpvalues = reader:nextByte()
 				proto.isVarArg = toboolean(reader:nextByte())
 
+				print('fi')
+
 				-- prepare a table for upvalue references for further use if there are any
 				if proto.numUpvalues > 0 then
 					proto.nestedUpvalues = table.create(proto.numUpvalues)
 				end
+
+				print('grah')
 
 				-- read flags and typeinfo if bytecode version includes that information
 				if bytecodeVersion >= 4 then
@@ -129,11 +136,15 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					proto.typeinfo = reader:nextBytes(reader:nextVarInt()) -- array of uint8
 				end
 
+				print('uh...')
+
 				proto.sizeInsns = reader:nextVarInt() -- total number of instructions
 				for i = 1, proto.sizeInsns do
 					local encodedInsn = reader:nextUInt32()
 					proto.insnTable[i] = encodedInsn
 				end
+
+				print('ight J')
 
 				-- this might be confusing but just read into it
 				proto.sizeConsts = reader:nextVarInt() -- total number of constants
@@ -328,8 +339,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		print('handle')
 
 		local mainProto, protoTable, stringTable = disassemble()
-
-		print('outside handle')
 
 		local inlineRemarks = {}
 		local function handleInlinedCalls()
