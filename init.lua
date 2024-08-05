@@ -1427,10 +1427,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						end
 					end
 
-					local ctor = opConstructors[opInfo.name]
-					if opInfo.name=='LOADK' then
-						-- TODO
-					end												
+					local ctor = opConstructors[opInfo.name]											
 					if ctor then
 						print(opInfo.name)
 						ctor()
