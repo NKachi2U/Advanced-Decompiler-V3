@@ -75,6 +75,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	print('bro')
 	--
 	local reader = Reader.new(bytecode)
+
+	print('k')
 	--
 	-- collects all information from the bytecode and organizes it
 	local function disassemble()
@@ -306,6 +308,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local mainProtoId = reader:nextVarInt()
 		return protoTable[mainProtoId], protoTable, stringTable
 	end
+
+	print('idk what to write')
+		
 	local function roughDecompilation()
 		local output = ""
 
