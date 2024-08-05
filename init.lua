@@ -458,8 +458,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 			end
 			local function modifyRegister(register, isUpvalue)
 				-- parameter registers are preallocated
-				print('Register Proto Error?')
-				print('Register:', register, '\nNumParams:', protoNumParams)
 				if register < protoNumParams then
 					return `p{(totalParams - protoNumParams) + register + 1}`
 				else
@@ -1401,10 +1399,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						end
 					end
 
-					print('constructor issue?')
 					local ctor = opConstructors[opInfo.name]
+					if opInfo.name=='LOADK' then
+						-- TODO
+					end												
 					if ctor then
-						print(opInfo.name)
 						ctor()
 					else
 						warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
