@@ -200,10 +200,14 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						constValue = closureId
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_VECTOR then
 						print('7s')
-						local x, y, z = reader:nextFloat(), reader:nextFloat(), reader:nextFloat()
+						local x = reader:nextFloat()
 						print('7s2')
-						constValue = `Vector3.new({x}, {y}, {z})`
+						local y = reader:nextFloat()
 						print('7s3')
+						local z = reader:nextFloat()
+						print('7s4')
+						constValue = `Vector3.new({x}, {y}, {z})`
+						print('7s5')
 					elseif constType ~= LuauBytecodeTag.LBC_CONSTANT_NIL then
 						-- handle unknown constant type later
 					end
