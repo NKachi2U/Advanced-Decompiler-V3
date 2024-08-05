@@ -731,11 +731,10 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						opConstructors["BREAK"] = function()
 							protoOutput ..= "break (debugger)"
 						end
-						--opConstructors["LOADK"] = function()
-						--	local k = proto.constsTable[D + 1] or nilValue
-						--	protoOutput ..= baseLocal(A, handleConstantValue(k))
-						--end
-						opConstructors["LOADK"] = nil
+						opConstructors["LOADK"] = function()
+							local k = proto.constsTable[D + 1] or nilValue
+							protoOutput ..= baseLocal(A, handleConstantValue(k))
+						end
 						opConstructors["LOADKX"] = function()
 							local k = proto.constsTable[aux + 1] or nilValue
 							protoOutput ..= baseLocal(A, handleConstantValue(k))
@@ -1141,11 +1140,10 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						opConstructors["ADD"] = function()
 							protoOutput ..= baseLocal(A, `{modifyRegister(B)} + {modifyRegister(C)}`)
 						end
-						--opConstructors["ADDK"] = function()
-						--	local k = proto.constsTable[C + 1] or nilValue
-						--	protoOutput ..= baseLocal(A, `{modifyRegister(B)} + {handleConstantValue(k)}`)
-						--end
-						opConstructors["ADDK"] = nil
+						opConstructors["ADDK"] = function()
+							local k = proto.constsTable[C + 1] or nilValue
+							protoOutput ..= baseLocal(A, `{modifyRegister(B)} + {handleConstantValue(k)}`)
+						end
 						opConstructors["SUB"] = function()
 							protoOutput ..= baseLocal(A, `{modifyRegister(B)} - {modifyRegister(C)}`)
 						end
@@ -1156,11 +1154,10 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						opConstructors["MUL"] = function()
 							protoOutput ..= baseLocal(A, `{modifyRegister(B)} * {modifyRegister(C)}`)
 						end
-						--opConstructors["MULK"] = function()
-						--	local k = proto.constsTable[C + 1] or nilValue
-						--	protoOutput ..= baseLocal(A, `{modifyRegister(B)} * {handleConstantValue(k)}`)
-						--end
-						opConstructors["MULK"] = nil
+						opConstructors["MULK"] = function()
+							local k = proto.constsTable[C + 1] or nilValue
+							protoOutput ..= baseLocal(A, `{modifyRegister(B)} * {handleConstantValue(k)}`)
+						end
 						opConstructors["DIV"] = function()
 							protoOutput ..= baseLocal(A, `{modifyRegister(B)} / {modifyRegister(C)}`)
 						end
@@ -1429,8 +1426,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 					local ctor = opConstructors[opInfo.name]											
 					if ctor then
-						print(opInfo.name)
-						ctor()
+						pcall(ctor)
 					else
 						warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
 					end
