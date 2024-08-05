@@ -86,6 +86,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 			typeEncodingVersion = reader:nextByte()
 		end
 
+		print('dissasemble wat')
+
 		local stringTable = {}
 		local function readStringTable()
 			local sizeStringTable = reader:nextVarInt()
