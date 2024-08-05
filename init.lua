@@ -80,6 +80,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	--
 	-- collects all information from the bytecode and organizes it
 	local function disassemble()
+		print('dissasemble')
 		if bytecodeVersion >= 4 then
 			-- type encoding did not exist before this version
 			typeEncodingVersion = reader:nextByte()
@@ -1505,8 +1506,12 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	local function manager(proceed, issue)
 		print('managerstart')
 		if proceed then
+
+			print('tElapsed')
 			local startTime
 			local elapsedTime
+
+			print('Elapsed2')
 
 			local result
 			local function processingTask()
