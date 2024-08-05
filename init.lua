@@ -1400,8 +1400,10 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						end
 					end
 
+					print('constructor issue?
 					local ctor = opConstructors[opInfo.name]
 					if ctor then
+						print('constructor..?')
 						ctor()
 					else
 						warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
