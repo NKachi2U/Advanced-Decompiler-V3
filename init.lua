@@ -94,7 +94,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local function readProtoTable()
 			local sizeProtoTable = reader:nextVarInt()
 			for i = 1, sizeProtoTable do
-				print('well well')
 				local protoId = i - 1 -- account for main proto
 
 				local proto = {
@@ -138,13 +137,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 				-- this might be confusing but just read into it
 				proto.sizeConsts = reader:nextVarInt() -- total number of constants
-				print('varint')
 				for i = 1, proto.sizeConsts do
-					print('sizeconsts')
 					local constType = reader:nextByte()
 					local constValue
-
-					print('consttype')
 					if constType == LuauBytecodeTag.LBC_CONSTANT_BOOLEAN then
 						-- 1 = true, 0 = false
 						constValue = toboolean(reader:nextByte())
@@ -207,11 +202,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					elseif constType ~= LuauBytecodeTag.LBC_CONSTANT_NIL then
 						-- handle unknown constant type later
 					end
-					print('consttab')
 
 					proto.constsTable[i] = { ["type"] = constType, ["value"] = constValue }
 				end
-				print('size inner protos')
 
 				proto.sizeInnerProtos = reader:nextVarInt() -- total number of protos inside this proto
 				for i = 1, proto.sizeInnerProtos do
@@ -240,7 +233,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					local added = {}
 					local smallLineInfo = {}
 					local largeLineInfo = {}
-					print('isntable')
 
 					for i, insn in proto.insnTable do
 						local val = reader:nextByte()
@@ -270,14 +262,13 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						smallLineInfo[i] = val
 					end
 
-					print('intervals')
+				
 
 					for i = 1, intervals do
 						local val = reader:nextUInt32()
 						largeLineInfo[i - 1] = val
 					end
 
-					print('smallLineInfo')
 
 					for i, offset in smallLineInfo do
 						-- HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP
@@ -303,10 +294,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						proto.largeLineInfo[i] = bit32.band(lastLine, 0xFFFF)
 					end
 
-					print('end of smalline info')
+			
 				end
 
-				print('start of debug')
 
 				-- debug info is local and function parameter names, all that
 				local hasDebugInfo = toboolean(reader:nextByte())
@@ -314,16 +304,16 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					-- script does not use Roblox bytecode
 					return ":("
 				end
-				print('end of debug')
+		
 			end
-			print('end of func')
+		
 		end
 		print('st3')
 		readProtoTable()
 		print('st4')
 
 		local mainProtoId = reader:nextVarInt()
-		print('nextvar')
+	
 		return protoTable[mainProtoId], protoTable, stringTable
 	end
 		
