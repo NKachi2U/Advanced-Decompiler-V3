@@ -1141,10 +1141,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						opConstructors["ADD"] = function()
 							protoOutput ..= baseLocal(A, `{modifyRegister(B)} + {modifyRegister(C)}`)
 						end
-						opConstructors["ADDK"] = function()
-							local k = proto.constsTable[C + 1] or nilValue
-							protoOutput ..= baseLocal(A, `{modifyRegister(B)} + {handleConstantValue(k)}`)
-						end
+						--opConstructors["ADDK"] = function()
+						--	local k = proto.constsTable[C + 1] or nilValue
+						--	protoOutput ..= baseLocal(A, `{modifyRegister(B)} + {handleConstantValue(k)}`)
+						--end
+						opConstructors["ADDK"] = nil
 						opConstructors["SUB"] = function()
 							protoOutput ..= baseLocal(A, `{modifyRegister(B)} - {modifyRegister(C)}`)
 						end
