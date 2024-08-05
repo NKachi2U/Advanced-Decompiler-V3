@@ -69,7 +69,7 @@ local isGlobal = Implementations.isGlobal
 
 Reader:Set(READER_FLOAT_PRECISION)
 
-local function Decompile(bytecode)
+local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	local bytecodeVersion, typeEncodingVersion
 	--
 	local reader = Reader.new(bytecode)
