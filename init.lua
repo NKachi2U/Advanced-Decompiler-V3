@@ -95,6 +95,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		end
 		readStringTable()
 
+		print('dissasemble2')
+
 		local protoTable = {}
 		local function readProtoTable()
 			local sizeProtoTable = reader:nextVarInt()
@@ -304,6 +306,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				end
 			end
 		end
+		print('st3')
 		readProtoTable()
 
 		local mainProtoId = reader:nextVarInt()
