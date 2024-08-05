@@ -92,7 +92,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 		local protoTable = {}
 		local function readProtoTable()
+			print('ok here')
 			local sizeProtoTable = reader:nextVarInt()
+			print('still ight')
 			for i = 1, sizeProtoTable do
 				local protoId = i - 1 -- account for main proto
 
@@ -204,6 +206,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 					proto.constsTable[i] = { ["type"] = constType, ["value"] = constValue }
 				end
+				print('size inner protos')
 
 				proto.sizeInnerProtos = reader:nextVarInt() -- total number of protos inside this proto
 				for i = 1, proto.sizeInnerProtos do
@@ -232,6 +235,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					local added = {}
 					local smallLineInfo = {}
 					local largeLineInfo = {}
+					print('isntable')
 
 					for i, insn in proto.insnTable do
 						local val = reader:nextByte()
@@ -261,10 +265,14 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						smallLineInfo[i] = val
 					end
 
+					print('intervals')
+
 					for i = 1, intervals do
 						local val = reader:nextUInt32()
 						largeLineInfo[i - 1] = val
 					end
+
+					print('smallLineInfo')
 
 					for i, offset in smallLineInfo do
 						-- HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP HELP
@@ -298,6 +306,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					return ":("
 				end
 			end
+			print('end of func')
 		end
 		print('st3')
 		readProtoTable()
