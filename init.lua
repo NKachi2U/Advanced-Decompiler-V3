@@ -576,7 +576,6 @@ local function Decompile(bytecode)
 					end
 
 					output ..= `p{paramRef}{typeSetString}`
-					print('I proto error?')
 					if i < proto.numParams then
 						output ..= ", "
 					end
@@ -1210,7 +1209,7 @@ local function Decompile(bytecode)
 								local id = t.keys[i]
 								local k = proto.constsTable[id]
 								protoOutput ..= handleConstantValue(k)
-								print('i t.size error?')
+
 								if i < t.size then
 									protoOutput ..= ", "
 								end
@@ -1414,7 +1413,7 @@ local function Decompile(bytecode)
 								protoOutput ..= " -- referenced by "
 								for i = 1, #v.refs do
 									protoOutput ..= "#" .. v.refs[i]
-									print('i vrefs error?')
+	
 									if i < #v.refs then
 										protoOutput ..= ", "
 									end
@@ -1493,6 +1492,7 @@ local function Decompile(bytecode)
 
 			-- wait for yielding task
 			print('decompiler timeout error?')
+			print(DECOMPILER_TIMEOUT)
 			while not result and (os.clock() - startTime) < DECOMPILER_TIMEOUT do
 				task.wait()
 			end
@@ -1515,6 +1515,7 @@ local function Decompile(bytecode)
 	--
 	bytecodeVersion = reader:nextByte()
 	print('bytecodeversion error?')
+	print(bytecodeVersion)
 	if bytecodeVersion == 0 then
 		-- script errored
 		return manager(false, "COMPILATION_FAILURE")
