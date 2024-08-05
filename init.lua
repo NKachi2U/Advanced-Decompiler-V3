@@ -1426,7 +1426,10 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 					local ctor = opConstructors[opInfo.name]											
 					if ctor then
-						pcall(ctor)
+						local success = pcall(ctor)
+						if not success then
+							warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
+						end
 					else
 						warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
 					end
