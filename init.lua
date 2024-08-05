@@ -199,7 +199,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						local closureId = reader:nextVarInt() + 1
 						constValue = closureId
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_VECTOR then
-						print('7s')
+						print('7s1')
 						local x = reader:nextFloat()
 						print('7s2')
 						local y = reader:nextFloat()
