@@ -297,7 +297,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						proto.smallLineInfo[i] = lastOffset
 						proto.largeLineInfo[i] = bit32.band(lastLine, 0xFFFF)
 					end
+
+					print('end of smalline info')
 				end
+
+				print('start of debug')
 
 				-- debug info is local and function parameter names, all that
 				local hasDebugInfo = toboolean(reader:nextByte())
@@ -305,6 +309,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					-- script does not use Roblox bytecode
 					return ":("
 				end
+				print('end of debug')
 			end
 			print('end of func')
 		end
