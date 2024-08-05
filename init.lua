@@ -71,6 +71,8 @@ Reader:Set(READER_FLOAT_PRECISION)
 
 local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	local bytecodeVersion, typeEncodingVersion
+
+	print('bro')
 	--
 	local reader = Reader.new(bytecode)
 	--
@@ -309,6 +311,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 		local mainProto, protoTable, stringTable = disassemble()
 
+		print('outside handle')
+
 		local inlineRemarks = {}
 		local function handleInlinedCalls()
 			-- its either my lineinfo implementation is faulty or roblox's inlining
@@ -381,6 +385,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local totalParams = 0
 		local totalVars = 0
 
+		print('outside baseproto')
+
 		local function baseProto(proto, depth, isMainProto)
 			local localData = {}
 			local refData = {}
@@ -441,6 +447,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 			local protoFlags = proto.flags
 
 			local protoVars = 0
+
+			print('error... ?')
 
 			local function logRegister(t, register)
 				local dataTable
