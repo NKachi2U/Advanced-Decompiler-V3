@@ -72,21 +72,14 @@ Reader:Set(READER_FLOAT_PRECISION)
 local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	local bytecodeVersion, typeEncodingVersion
 
-	print('bro')
-	--
 	local reader = Reader.new(bytecode)
-
-	print('k')
 	--
 	-- collects all information from the bytecode and organizes it
 	local function disassemble()
-		print('dissasemble')
 		if bytecodeVersion >= 4 then
 			-- type encoding did not exist before this version
 			typeEncodingVersion = reader:nextByte()
 		end
-
-		print('dissasemble wat')
 
 		local stringTable = {}
 		local function readStringTable()
@@ -314,11 +307,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local mainProtoId = reader:nextVarInt()
 		return protoTable[mainProtoId], protoTable, stringTable
 	end
-
-	print('idk what to write')
 		
 	local function roughDecompilation()
 		local output = ""
+
+		print('handle')
 
 		local mainProto, protoTable, stringTable = disassemble()
 
