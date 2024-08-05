@@ -303,8 +303,10 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		end
 		print('st3')
 		readProtoTable()
+		print('st4')
 
 		local mainProtoId = reader:nextVarInt()
+		print('nextvar')
 		return protoTable[mainProtoId], protoTable, stringTable
 	end
 		
