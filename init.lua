@@ -90,8 +90,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		end
 		readStringTable()
 
-		print('dissasemble2')
-
 		local protoTable = {}
 		local function readProtoTable()
 			local sizeProtoTable = reader:nextVarInt()
@@ -391,8 +389,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local totalParams = 0
 		local totalVars = 0
 
-		print('outside baseproto')
-
 		local function baseProto(proto, depth, isMainProto)
 			local localData = {}
 			local refData = {}
@@ -454,7 +450,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 			local protoVars = 0
 
-			print('error... ?')
 
 			local function logRegister(t, register)
 				local dataTable
@@ -610,8 +605,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 			--
 
-			print("Has there been an error yet?")
-
 			local protoOutput = ""
 
 			local function addTab(depth)
@@ -629,13 +622,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				depth += 1
 			end
 
-			print('any error here?')
-
 			-- instruction handling here
 			local expectation
 			local nextIsAux = false
-
-			print('starting loop')
 
 			for insnIndex, insn in proto.insnTable do
 				if nextIsAux then
@@ -1504,14 +1493,10 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 	end
 	print('optimize')
 	local function manager(proceed, issue)
-		print('managerstart')
 		if proceed then
 
-			print('tElapsed')
 			local startTime
 			local elapsedTime
-
-			print('Elapsed2')
 
 			local result
 			local function processingTask()
