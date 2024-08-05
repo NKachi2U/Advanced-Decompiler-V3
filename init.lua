@@ -1495,11 +1495,15 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 		return output
 	end
+
+	print('outside rough')														
 	-- supposed to cleanup temporary registers
 	local function optimize(code)
 		return code
 	end
+	print('optimize')
 	local function manager(proceed, issue)
+		print('managerstart')
 		if proceed then
 			local startTime
 			local elapsedTime
