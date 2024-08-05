@@ -707,10 +707,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						opConstructors["BREAK"] = function()
 							protoOutput ..= "break (debugger)"
 						end
-						opConstructors["LOADK"] = function()
-							local k = proto.constsTable[D + 1] or nilValue
-							protoOutput ..= baseLocal(A, handleConstantValue(k))
-						end
+						--opConstructors["LOADK"] = function()
+						--	local k = proto.constsTable[D + 1] or nilValue
+						--	protoOutput ..= baseLocal(A, handleConstantValue(k))
+						--end
+						opConstructors["LOADK"] = nil
 						opConstructors["LOADKX"] = function()
 							local k = proto.constsTable[aux + 1] or nilValue
 							protoOutput ..= baseLocal(A, handleConstantValue(k))
