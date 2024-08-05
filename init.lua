@@ -596,7 +596,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 			--
 
-			print("Has there been an error yet"?)
+			print("Has there been an error yet?")
 
 			local protoOutput = ""
 
