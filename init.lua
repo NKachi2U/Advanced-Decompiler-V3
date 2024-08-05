@@ -1544,6 +1544,8 @@ end
 
 																
 local decompile = function(script, timeout)
+	print('cmon bro')
+																	
 	if typeof(script) ~= "Instance" then
 		error("invalid argument #1 to 'decompile' (Instance expected)", 2)
 		return
