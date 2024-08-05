@@ -97,8 +97,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				print('well well')
 				local protoId = i - 1 -- account for main proto
 
-				print('account')
-
 				local proto = {
 					id = protoId,
 
@@ -113,30 +111,22 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				}
 				protoTable[protoId] = proto
 
-				print('guh')
-
 				-- read header
 				proto.maxStackSize = reader:nextByte()
 				proto.numParams = reader:nextByte()
 				proto.numUpvalues = reader:nextByte()
 				proto.isVarArg = toboolean(reader:nextByte())
 
-				print('fi')
-
 				-- prepare a table for upvalue references for further use if there are any
 				if proto.numUpvalues > 0 then
 					proto.nestedUpvalues = table.create(proto.numUpvalues)
 				end
-
-				print('grah')
 
 				-- read flags and typeinfo if bytecode version includes that information
 				if bytecodeVersion >= 4 then
 					proto.flags = reader:nextByte()
 					proto.typeinfo = reader:nextBytes(reader:nextVarInt()) -- array of uint8
 				end
-
-				print('uh...')
 
 				proto.sizeInsns = reader:nextVarInt() -- total number of instructions
 				for i = 1, proto.sizeInsns do
@@ -148,10 +138,13 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 				-- this might be confusing but just read into it
 				proto.sizeConsts = reader:nextVarInt() -- total number of constants
+				print('varint')
 				for i = 1, proto.sizeConsts do
+					print('sizeconsts')
 					local constType = reader:nextByte()
 					local constValue
 
+					print('consttype')
 					if constType == LuauBytecodeTag.LBC_CONSTANT_BOOLEAN then
 						-- 1 = true, 0 = false
 						constValue = toboolean(reader:nextByte())
@@ -214,6 +207,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					elseif constType ~= LuauBytecodeTag.LBC_CONSTANT_NIL then
 						-- handle unknown constant type later
 					end
+					print('consttab')
 
 					proto.constsTable[i] = { ["type"] = constType, ["value"] = constValue }
 				end
