@@ -368,8 +368,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					else
 						local prevInstructionLine = smallLineInfo[i - 1]
 						local largePrevInstructionLine = largeLineInfo[i - 1]
-
+						print('minus 0')
 						if not prevInstructionLine or ((instructionLine + largeInstructionLine) - (prevInstructionLine + largePrevInstructionLine)) >= 30 then
+							print('minus 1')
 							local actualInstructionLine = largeInstructionLine + (instructionLine - (0xFF + 1))
 
 							local insnOP = Luau:INSN_OP(insn)
@@ -394,7 +395,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 							end
 						end
 					end
-
+					print('minus 2')
 					smallLineInfo[i] = instructionLine - lineOffset
 				end
 			end
