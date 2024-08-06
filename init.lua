@@ -323,6 +323,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		print('st4')
 
 		local mainProtoId = reader:nextVarInt()
+
+		print('st5')
 	
 		return protoTable[mainProtoId], protoTable, stringTable
 	end
@@ -397,7 +399,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				end
 			end
 		end
+		print('inline')
 		handleInlinedCalls()
+		print('handledInline')
 
 		local globalData = {}
 
@@ -1486,7 +1490,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 			return protoOutput
 		end
 
+		print('base proto start')
+
 		local decompiledOutput = baseProto(mainProto, 0, true)
+
+		print('base proto end')
 
 		if LIST_USED_GLOBALS then
 			if #globalData > 0 then
