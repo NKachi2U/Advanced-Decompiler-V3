@@ -137,7 +137,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 				-- this might be confusing but just read into it
 				proto.sizeConsts = reader:nextVarInt() -- total number of constants
-				print('const got')
 				for i = 1, proto.sizeConsts do
 					local constType = reader:nextByte()
 					local constValue
@@ -364,13 +363,11 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					else
 						local prevInstructionLine = smallLineInfo[i - 1]
 						local largePrevInstructionLine = largeLineInfo[i - 1]
+						print(instructionLine)
 						if not instructionLine then continue end
 						if not prevInstructionLine or ((instructionLine + largeInstructionLine) - (prevInstructionLine + largePrevInstructionLine)) >= 30 then
-							print('minus 1')
-							print(instructionLine)
-							print(0xFF+1)
+							
 							local actualInstructionLine = largeInstructionLine + (instructionLine - (0xFF + 1))
-							print('mi1done')
 
 							local insnOP = Luau:INSN_OP(insn)
 							local opInfo = LuauOpCode[insnOP]
@@ -1490,11 +1487,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 			return protoOutput
 		end
 
-		print('base proto start')
-
 		local decompiledOutput = baseProto(mainProto, 0, true)
-
-		print('base proto end')
 
 		if LIST_USED_GLOBALS then
 			if #globalData > 0 then
@@ -1561,7 +1554,6 @@ end
 
 																
 local decompile = function(script, timeout)
-	print('cmon bro')
 																	
 	if typeof(script) ~= "Instance" then
 		error("invalid argument #1 to 'decompile' (Instance expected)", 2)
