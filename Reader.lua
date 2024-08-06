@@ -45,7 +45,7 @@ function Reader.new(bytecode)
 	function self:nextFloat()
 		local result = buffer.readf32(stream, cursor)
 		cursor += 4
-		return tonumber(string.format("%0.6f", result))
+		return tonumber(string.format("%0.24f", result))
 	end
 
 	function self:nextVarInt()
