@@ -132,6 +132,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				proto.sizeInsns = reader:nextVarInt() -- total number of instructions
 				for i = 1, proto.sizeInsns do
 					local encodedInsn = reader:nextUInt32()
+					print(encodesInsn)
 					proto.insnTable[i] = encodedInsn
 				end
 
@@ -1425,9 +1426,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					local ctor = opConstructors[opInfo.name]											
 					if ctor then
 						ctor()
-						if not true then
-							warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
-						end
 					else
 						warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
 					end
