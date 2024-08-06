@@ -135,8 +135,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					proto.insnTable[i] = encodedInsn
 				end
 
-				print('ight J')
-
 				-- this might be confusing but just read into it
 				proto.sizeConsts = reader:nextVarInt() -- total number of constants
 				print('const got')
@@ -145,17 +143,13 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					local constValue
 					if constType == LuauBytecodeTag.LBC_CONSTANT_BOOLEAN then
 						-- 1 = true, 0 = false
-						print('1s')
 						constValue = toboolean(reader:nextByte())
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_NUMBER then
-						print('2s')
 						constValue = reader:nextDouble()
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_STRING then
-						print('3s')
 						local stringId = reader:nextVarInt()
 						constValue = stringTable[stringId]
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_IMPORT then
-						print('4s')
 						local id = reader:nextUInt32()
 
 						local indexCount = rshift(id, 30)
@@ -187,7 +181,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 						constValue = "import - " .. importTag
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_TABLE then
-						print('5s')
 						local sizeTable = reader:nextVarInt()
 						local tableKeys = {}
 
@@ -198,17 +191,12 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 						constValue = { ["size"] = sizeTable, ["keys"] = tableKeys }
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_CLOSURE then
-						print('6s')
 						local closureId = reader:nextVarInt() + 1
 						constValue = closureId
 					elseif constType == LuauBytecodeTag.LBC_CONSTANT_VECTOR then
-						print('7s1')
 						local x = reader:nextFloat()
-						print('7s2')
 						local y = reader:nextFloat()
-						print('7s3')
 						local z = reader:nextFloat()
-						print('7s4')
 						local w = reader:nextFloat()
 						if not (w==0) then
 							constValue = `Vector3.new({x}, {y}, {z})`	
@@ -216,7 +204,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 							constValue = `Vector3.new({x}, {y}, {z}, {w})`
 						end
 						
-						print('7s5')
 					elseif constType ~= LuauBytecodeTag.LBC_CONSTANT_NIL then
 						-- handle unknown constant type later
 					end
@@ -326,9 +313,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 			end
 		
 		end
-		print('st3')
 		readProtoTable()
-		print('st4')
+		
 
 		local mainProtoId = reader:nextVarInt()
 
@@ -1442,8 +1428,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 					local ctor = opConstructors[opInfo.name]											
 					if ctor then
-						local success = pcall(ctor)
-						if not success then
+						ctor()
+						if not true then
 							warn(`OP '{opInfo.name}' went unhandled: missing constructor`)
 						end
 					else
@@ -1509,7 +1495,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local decompiledOutput = baseProto(mainProto, 0, true)
 
 		print('base proto end')
-		print(not(decompiledOutput==nil))
 
 		if LIST_USED_GLOBALS then
 			if #globalData > 0 then
@@ -1521,13 +1506,12 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 		return output
 	end
-
-	print('outside rough')														
+													
 	-- supposed to cleanup temporary registers
 	local function optimize(code)
 		return code
 	end
-	print('optimize')
+																	
 	local function manager(proceed, issue)
 		if proceed then
 
@@ -1543,8 +1527,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 			task.spawn(processingTask)
 
 			-- wait for yielding task
-			print('decompiler timeout error?')
-			print(DECOMPILER_TIMEOUT)
 			while not result and (os.clock() - startTime) < DECOMPILER_TIMEOUT do
 				task.wait()
 			end
