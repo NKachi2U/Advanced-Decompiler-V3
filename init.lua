@@ -414,7 +414,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local totalVars = 0
 
 		local function baseProto(proto, depth, isMainProto)
-			if not proto then return end
 				
 			local localData = {}
 			local refData = {}
