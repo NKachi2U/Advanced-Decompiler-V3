@@ -1502,6 +1502,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local decompiledOutput = baseProto(mainProto, 0, true)
 
 		print('base proto end')
+		print(not(decompiledOutput==nil))
 
 		if LIST_USED_GLOBALS then
 			if #globalData > 0 then
