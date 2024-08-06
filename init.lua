@@ -368,7 +368,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					else
 						local prevInstructionLine = smallLineInfo[i - 1]
 						local largePrevInstructionLine = largeLineInfo[i - 1]
-						if instructionLine and not prevInstructionLine or ((instructionLine + largeInstructionLine) - (prevInstructionLine + largePrevInstructionLine)) >= 30 then
+						if not instructionLine then continue end
+						if not prevInstructionLine or ((instructionLine + largeInstructionLine) - (prevInstructionLine + largePrevInstructionLine)) >= 30 then
 							print('minus 1')
 							print(instructionLine)
 							print(0xFF+1)
