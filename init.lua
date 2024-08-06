@@ -137,6 +137,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 				-- this might be confusing but just read into it
 				proto.sizeConsts = reader:nextVarInt() -- total number of constants
+				print('const got')
 				for i = 1, proto.sizeConsts do
 					local constType = reader:nextByte()
 					local constValue
@@ -328,8 +329,6 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		
 	local function roughDecompilation()
 		local output = ""
-
-		print('handle')
 
 		local mainProto, protoTable, stringTable = disassemble()
 
