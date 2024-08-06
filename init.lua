@@ -132,7 +132,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 				proto.sizeInsns = reader:nextVarInt() -- total number of instructions
 				for i = 1, proto.sizeInsns do
 					local encodedInsn = reader:nextUInt32()
-					print(encodesInsn)
+					
 					proto.insnTable[i] = encodedInsn
 				end
 
@@ -364,7 +364,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 					else
 						local prevInstructionLine = smallLineInfo[i - 1]
 						local largePrevInstructionLine = largeLineInfo[i - 1]
-						print(instructionLine)
+						print('Instruction line:', instructionLine)
 						if not prevInstructionLine or ((instructionLine + largeInstructionLine) - (prevInstructionLine + largePrevInstructionLine)) >= 30 then
 							
 							local actualInstructionLine = largeInstructionLine + (instructionLine - (0xFF + 1))
@@ -678,7 +678,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						local instructionLargeLine = proto.largeLineInfo[insnIndex]
 						lineStr ..= `[line {instructionLargeLine + instructionLine}] `
 					end
-
+					
+					print('index:', insnIndex)
 					protoOutput ..= lineStr .. tostring(insnIndex) .. "."
 
 					addTab(1)
