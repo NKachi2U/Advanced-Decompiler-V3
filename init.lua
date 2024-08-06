@@ -324,7 +324,9 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 		local mainProtoId = reader:nextVarInt()
 
-		print('st5')
+		print(mainProtoId)
+		print(protoTable)
+		print(stringTable)
 	
 		return protoTable[mainProtoId], protoTable, stringTable
 	end
@@ -412,6 +414,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local totalVars = 0
 
 		local function baseProto(proto, depth, isMainProto)
+			if not proto then return end
+				
 			local localData = {}
 			local refData = {}
 			--local upvalRefData = {}
