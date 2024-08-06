@@ -372,6 +372,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 						if not prevInstructionLine or ((instructionLine + largeInstructionLine) - (prevInstructionLine + largePrevInstructionLine)) >= 30 then
 							print('minus 1')
 							local actualInstructionLine = largeInstructionLine + (instructionLine - (0xFF + 1))
+							print('mi1done')
 
 							local insnOP = Luau:INSN_OP(insn)
 							local opInfo = LuauOpCode[insnOP]
