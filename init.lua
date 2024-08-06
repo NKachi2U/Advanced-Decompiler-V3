@@ -131,7 +131,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 				proto.sizeInsns = reader:nextVarInt() -- total number of instructions
 				for i = 1, proto.sizeInsns do
-					local encodedInsn = reader:nextInt32()
+					local encodedInsn = reader:nextUInt32()
 					print('creating',i)
 					proto.insnTable[i] = encodedInsn
 				end
