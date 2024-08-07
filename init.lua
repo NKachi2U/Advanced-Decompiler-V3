@@ -319,6 +319,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		local mainProtoId = reader:nextVarInt()
 
 		print(mainProtoId)
+		print(protoTable)
 		table.foreach(protoTable, function(i,v) print(i) end)
 		print(stringTable)
 	
