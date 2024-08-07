@@ -320,7 +320,7 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 
 		print(mainProtoId)
 		print(protoTable)
-		table.foreach(protoTable, function(i,v) print(i) end)
+		print(#protoTable)
 		print(stringTable)
 	
 		return protoTable[mainProtoId], protoTable, stringTable
