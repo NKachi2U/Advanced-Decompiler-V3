@@ -1546,7 +1546,8 @@ local function Decompile(bytecode, DECOMPILER_TIMEOUT)
 		-- script uses supported bytecode version
 		return manager(true)
 	else
-		return manager(false, "UNSUPPORTED_LBC_VERSION")
+		return manager(true)
+		--return manager(false, "UNSUPPORTED_LBC_VERSION")
 	end
 end
 
